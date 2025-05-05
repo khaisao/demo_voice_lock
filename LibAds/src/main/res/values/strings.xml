@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="ad_attribution">Ad</string>
+    <string name="sponsored">Sponsored</string>
+    <string name="advertisement">Advertisement</string>
+    <string name="loading_ads">Loading ads...</string>
+
+
+</resources>

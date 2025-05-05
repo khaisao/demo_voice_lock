@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="pion.tech.pionbase.splash.presentation.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="pion.tech.pionbase.home.presetation.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="pion.tech.pionbase.language.presentation.LanguageFragment"
+        android:label="LanguageFragment"
+        tools:layout="@layout/fragment_language">
+        <action
+            android:id="@+id/action_languageFragment_to_onboardFragment"
+            app:destination="@id/onboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboardFragment"
+        android:name="pion.tech.pionbase.onboard.presentation.OnboardFragment"
+        android:label="OnboardFragment"
+        tools:layout="@layout/fragment_onboard">
+        <action
+            android:id="@+id/action_onboardFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="pion.tech.pionbase.setting.presentation.SettingFragment"
+        android:label="SettingFragment"
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_settingFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="pion.tech.pionbase.register.RegisterFragment"
+        android:label="RegisterFragment" />
+</navigation>
