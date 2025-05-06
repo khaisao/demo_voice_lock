@@ -29,9 +29,9 @@ class RegisterViewModel @Inject constructor(
     val listContent = mutableListOf(
         "Thời tiết đang như thế nào",
         "Mở khóa điện thoại của tôi",
-//        "Khô heo cháy tỏi",
-//        "Được đóng gói và phân phối bởi",
-//        "Ăn liền hoặc chế biến các món khác"
+        "Tìm đường đến quán cà phê gần nhất",
+        "Bật nhạc yêu thích của tôi lên",
+        "Tăng độ sáng màn hình lên tối đa"
     )
 
     val currentIndexSpeak = MutableStateFlow<Int?>(null)
