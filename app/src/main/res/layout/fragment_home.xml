@@ -11,14 +11,14 @@
         android:id="@+id/btn_register"
         android:layout_width="@dimen/_150dp"
         android:layout_height="wrap_content"
-        android:text="Register" />
+        android:text="Register voice" />
 
     <Button
         android:id="@+id/btn_test"
         android:layout_width="@dimen/_150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20dp"
-        android:text="Test" />
+        android:text="Test voice" />
 
     <Button
         android:id="@+id/btn_clear_data"
