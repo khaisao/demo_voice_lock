@@ -1,13 +1,17 @@
 package pion.tech.pionbase.register
 
 import com.piontech.core.base.BaseViewModel
+import com.piontech.core.base.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
+    private val speakerManager: SpeakerManager
 ) : BaseViewModel() {
 
     val isRecording = MutableStateFlow(false)
@@ -22,12 +26,12 @@ class RegisterViewModel @Inject constructor(
         _listEmbedded.value = currentList
     }
 
-    val listContent = mutableListOf<String>(
+    val listContent = mutableListOf(
         "Thời tiết đang như thế nào",
         "Mở khóa điện thoại của tôi",
-        "Khô heo cháy tỏi",
-        "Được đóng gói và phân phối bởi",
-        "Ăn liền hoặc chế biến các món khác"
+//        "Khô heo cháy tỏi",
+//        "Được đóng gói và phân phối bởi",
+//        "Ăn liền hoặc chế biến các món khác"
     )
 
     val currentIndexSpeak = MutableStateFlow<Int?>(null)
@@ -43,6 +47,25 @@ class RegisterViewModel @Inject constructor(
 
     fun getContentSpeak(index:Int): String {
         return listContent[index]
+    }
+
+    val isRecordingDone = MutableStateFlow(false)
+
+    fun saveSpeaker(name: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
+        launchIO({
+            onFailure.invoke()
+        }) {
+           val success = speakerManager.saveSpeaker(name, listEmbedded.value.toTypedArray())
+            if (success) {
+                withContext(Dispatchers.Main){
+                    onSuccess.invoke()
+                }
+            } else {
+                withContext(Dispatchers.Main){
+                    onFailure.invoke()
+                }
+            }
+        }
     }
 
 }

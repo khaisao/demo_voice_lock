@@ -138,7 +138,9 @@ fun Fragment.launchIO(
 ): Job {
     val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Timber.e("${this::class.java.simpleName} error: $throwable")
-        onError(throwable)
+        lifecycleScope.launch(Dispatchers.Main) {
+            onError(throwable)
+        }
     }
     return lifecycleScope.launch(Dispatchers.IO + exceptionHandler, block = block)
 }
@@ -149,7 +151,9 @@ fun Fragment.launchDefault(
 ): Job {
     val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Timber.e("${this::class.java.simpleName} error: $throwable")
-        onError(throwable)
+        lifecycleScope.launch(Dispatchers.Main) {
+            onError(throwable)
+        }
     }
     return lifecycleScope.launch(Dispatchers.Default + exceptionHandler, block = block)
 }
@@ -160,7 +164,9 @@ fun Fragment.launchMain(
 ): Job {
     val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Timber.e("${this::class.java.simpleName} error: $throwable")
-        onError(throwable)
+        lifecycleScope.launch(Dispatchers.Main) {
+            onError(throwable)
+        }
     }
     return lifecycleScope.launch(Dispatchers.Main + exceptionHandler, block = block)
 }

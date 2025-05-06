@@ -28,7 +28,7 @@ dependencyResolutionManagement {
 
 
 include(":app")
-rootProject.name = "PionBase"
+rootProject.name = "DemoVoiceLock"
 include(":LibIAP")
 include(":LibAds")
 include(":core")

@@ -8,9 +8,14 @@ import android.media.MediaRecorder
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.util.Log
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.k2fsa.sherpa.onnx.SpeakerRecognition
 import com.permissionx.guolindev.PermissionX
 import com.piontech.core.base.launchIO
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import pion.tech.pionbase.util.displayToast
 import pion.tech.pionbase.util.setPreventDoubleClick
 import timber.log.Timber
@@ -29,6 +34,7 @@ fun RegisterFragment.initTextToSpeech() {
                 override fun onStart(utteranceId: String?) {
                     // Bắt đầu nói
                     Timber.tag(TAG).d("onStart:")
+                    viewModel.isModelTalking.value = true
                 }
 
                 override fun onDone(utteranceId: String?) {
@@ -40,6 +46,7 @@ fun RegisterFragment.initTextToSpeech() {
 
                 override fun onError(utteranceId: String?) {
                     Timber.tag(TAG).d("onError:")
+                    viewModel.isModelTalking.value = false
                 }
             })
 
@@ -120,7 +127,7 @@ fun RegisterFragment.startTalking() {
                                 audioRecord = null
                                 if (sampleList == null) return@launchIO
                                 val stream = SpeakerRecognition.extractor.createStream()
-                                for (samples in sampleList) {
+                                for (samples in sampleList!!) {
                                     stream.acceptWaveform(
                                         samples = samples,
                                         sampleRate = sampleRateInHz
@@ -130,7 +137,11 @@ fun RegisterFragment.startTalking() {
                                 if (SpeakerRecognition.extractor.isReady(stream)) {
                                     val embedding = SpeakerRecognition.extractor.compute(stream)
                                     viewModel.addEmbedded(embedding)
-                                    viewModel.increaseIndexSpeak()
+                                    if ((viewModel.currentIndexSpeak.value
+                                            ?: 0) < viewModel.listContent.size
+                                    ) {
+                                        viewModel.increaseIndexSpeak()
+                                    }
                                 }
                                 viewModel.isRecording.value = false
                             }
@@ -140,6 +151,27 @@ fun RegisterFragment.startTalking() {
                     }
                 }
             }
+
+    }
+}
+
+fun RegisterFragment.registerEvent() {
+    binding.tvRegister.setPreventDoubleClick {
+        val speakerName = binding.btnName.text.toString().trim()
+        if (speakerName.isEmpty() || speakerName.isBlank()) {
+            displayToast("Please input a speaker name")
+            return@setPreventDoubleClick
+        }
+        if (SpeakerRecognition.manager.contains(speakerName)) {
+            displayToast("A speaker with $speakerName already exists. Please choose a new name")
+            return@setPreventDoubleClick
+        }
+        viewModel.saveSpeaker(name = speakerName, onSuccess = {
+            displayToast("Đã lưu thành công")
+            findNavController().navigateUp()
+        }, onFailure = {
+            displayToast("Lưu thất bại")
+        })
 
     }
 }

@@ -9,7 +9,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.k2fsa.sherpa.onnx.SpeakerRecognition
 import dagger.hilt.android.AndroidEntryPoint
 import pion.datlt.libads.AdsController
 import pion.tech.pionbase.BuildConfig
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         initAds()
-        SpeakerRecognition.initExtractor(this.assets)
     }
 
     private fun initAds() {

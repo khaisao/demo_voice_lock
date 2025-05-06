@@ -3,17 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
     android:orientation="vertical">
 
     <Button
         android:id="@+id/btn_register"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_150dp"
         android:layout_height="wrap_content"
         android:text="Register" />
 
     <Button
         android:id="@+id/btn_test"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_150dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20dp"
         android:text="Test" />
+
+    <Button
+        android:id="@+id/btn_clear_data"
+        android:layout_width="@dimen/_150dp"
+        android:layout_marginTop="@dimen/_20dp"
+        android:layout_height="wrap_content"
+        android:text="Clear data" />
+
+    <TextView
+        android:id="@+id/tv_data"
+        tools:text="Content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_20sp"
+        android:layout_marginTop="@dimen/_20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>

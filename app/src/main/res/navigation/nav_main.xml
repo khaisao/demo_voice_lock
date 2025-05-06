@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_homeFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_testSpeakerFragment"
+            app:destination="@id/testSpeakerFragment" />
     </fragment>
     <fragment
         android:id="@+id/languageFragment"
@@ -57,4 +60,8 @@
         android:id="@+id/registerFragment"
         android:name="pion.tech.pionbase.register.RegisterFragment"
         android:label="RegisterFragment" />
+    <fragment
+        android:id="@+id/testSpeakerFragment"
+        android:name="pion.tech.pionbase.testSpeaker.TestSpeakerFragment"
+        android:label="TestSpeakerFragment" />
 </navigation>

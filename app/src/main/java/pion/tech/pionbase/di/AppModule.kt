@@ -16,6 +16,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import pion.tech.pionbase.BuildConfig
 import pion.tech.pionbase.R
+import pion.tech.pionbase.main.domain.repository.DataStoreRepository
+import pion.tech.pionbase.register.SpeakerManager
 import javax.inject.Singleton
 
 val Context.dataStore by preferencesDataStore(name = "${BuildConfig.APPLICATION_ID}_preferences")
@@ -45,6 +47,15 @@ object AppModule {
     @Singleton
     fun provideDataStore(application: Application): DataStore<Preferences> {
         return application.dataStore
+    }
+
+    @Provides
+    @Singleton
+    fun provideSpeakerManager(
+        dataStoreRepository: DataStoreRepository,
+        application: Application
+    ): SpeakerManager {
+        return SpeakerManager(dataStoreRepository, application)
     }
 
 

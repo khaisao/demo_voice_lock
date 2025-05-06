@@ -23,4 +23,20 @@ class DataStoreRepositoryImpl(
         preferencesDataSource.setToken(token)
     }
 
+    override suspend fun saveSpeakerEmbeddings(speakerData: Map<String, Array<FloatArray>>) {
+        preferencesDataSource.saveSpeakerEmbeddings(speakerData)
+    }
+
+    override suspend fun getSpeakerEmbeddings(): Flow<Map<String, Array<FloatArray>>> {
+        return preferencesDataSource.getSpeakerEmbeddings()
+    }
+
+    override suspend fun addSpeakerEmbedding(name: String, embedding: Array<FloatArray>) {
+        preferencesDataSource.addSpeakerEmbedding(name, embedding)
+    }
+
+    override suspend fun deleteAllSpeakerEmbedding() {
+        preferencesDataSource.deleteAllSpeakerEmbedding()
+    }
+
 }
