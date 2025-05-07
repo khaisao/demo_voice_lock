@@ -93,7 +93,7 @@ class DataStoreSource(
                     val type = object : TypeToken<Map<String, List<List<Float>>>>() {}.type
                     val convertedData: Map<String, List<List<Float>>> = gson.fromJson(json, type) ?: emptyMap()
                     Timber.tag(TAG).d("convertedData ${convertedData}")
-
+                    Timber.tag(TAG).d("Speaker names: ${convertedData.keys}")
                     // Chuyển đổi lại thành Map<String, Array<FloatArray>>
                     convertedData.mapValues { (_, listOfLists) ->
                         listOfLists.map { innerList ->
